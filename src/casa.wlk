@@ -15,15 +15,18 @@ object casaDePepeYJulian {
 		return cosas.last().esElectrodomestico() or cosas.last().precio() > 5000
 	}
 	method esDerrochona() {
-		return cosas.sum({cosa => cosa.precio()} >= 9000
+		return cosas.sum({cosa => cosa.precio()}) >= 9000
 	}
 	method compraMasCara() {
-		return cosas.filter({cosa => cosa.precio().max()})
+		return cosas.max({cosa => cosa.precio()})
 	}
 	method electrodomesticosComprados() {
-		return cosas.count({cosa => cosa.esElectrodomesticos()}
+		return cosas.filter({cosa => cosa.esElectrodomestico()})
 	}
-	method queFaltaComprar(lista) {
-		return lista.filter( { quiero => not cosas.contains(quiero) })
+//	method queFaltaComprar(lista) {
+//		return lista.filter( { quiero => not cosas.contains(quiero) })
+//	}
+	method gastoEnComida() {
+		return cosas.filter({cosa => cosa.esComida()}).sum({ cosa => cosa.precio()})
 	}
 }
